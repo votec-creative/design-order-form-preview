@@ -43,7 +43,7 @@ let state = {
   selectedMedia: [],       // ['バニラ', '駅ちか', ...]
   mediumOther: '',
   mediaState: {},          // { 'バニラ': { checkedPlans:[idx,...], checkedSizes:[...], otherPlan:'', otherSize:'' } }
-  printMethod: '', printCompany: '', printFiles: [], printBleed: '', printFormat: '', printVersion: '',
+  printMethod: '', printCompany: '', printFiles: [], printBleed: '', printFormats: [], printVersion: '',
   imgsize: '', count: 0,
   imgMode: 'common',       // 'common' or 'individual'
   common: null,            // 共通指示（カードと同じ形のオブジェクト）
@@ -281,7 +281,7 @@ function resetPrintMethod() {
   state.printCompany = '';
   state.printFiles = [];
   state.printBleed = '';
-  state.printFormat = '';
+  state.printFormats = [];
   state.printVersion = '';
   document.querySelectorAll('#print-method-radios .rbtn').forEach(btn => btn.classList.remove('sel'));
   document.querySelectorAll('#print-bleed-radios .rbtn').forEach(btn => btn.classList.remove('sel'));
@@ -294,6 +294,8 @@ function resetPrintMethod() {
   if (versionInput) versionInput.value = '';
   const versionDetails = document.getElementById('print-version-details');
   if (versionDetails) versionDetails.style.display = 'none';
+  const bleedSpecButton = document.getElementById('rb-print-bleed-spec');
+  if (bleedSpecButton) bleedSpecButton.style.display = 'none';
   const externalDetails = document.getElementById('print-external-details');
   const inhouseGuidance = document.getElementById('print-inhouse-guidance');
   const unknownGuidance = document.getElementById('print-unknown-guidance');
@@ -309,6 +311,11 @@ function setPrintMethod(value) {
   });
   document.getElementById('print-external-details').style.display = value === 'external' ? 'block' : 'none';
   document.getElementById('print-inhouse-guidance').style.display = value === 'inhouse' ? 'flex' : 'none';
+  document.getElementById('rb-print-bleed-spec').style.display = value === 'external' ? '' : 'none';
+  if (value !== 'external' && state.printBleed === 'spec') {
+    state.printBleed = '';
+    document.getElementById('rb-print-bleed-spec').classList.remove('sel');
+  }
   updatePrintUnknownGuidance();
   document.getElementById('f-print-method').classList.remove('inv');
 }
@@ -323,17 +330,24 @@ function setPrintBleed(value) {
 }
 
 function setPrintFormat(value) {
-  state.printFormat = value;
+  if (value === 'unknown') {
+    state.printFormats = ['unknown'];
+  } else {
+    state.printFormats = state.printFormats.filter(option => option !== 'unknown');
+    state.printFormats = state.printFormats.includes(value)
+      ? state.printFormats.filter(option => option !== value)
+      : [...state.printFormats, value];
+  }
   ['jpg', 'pdf', 'eps', 'ai', 'psd', 'other', 'unknown'].forEach(option => {
-    document.getElementById('rb-print-format-' + option).classList.toggle('sel', option === value);
+    document.getElementById('rb-print-format-' + option).classList.toggle('sel', state.printFormats.includes(option));
   });
-  document.getElementById('print-version-details').style.display = ['eps', 'ai', 'psd', 'other'].includes(value) ? 'block' : 'none';
+  document.getElementById('print-version-details').style.display = state.printFormats.some(option => ['eps', 'ai', 'psd', 'other'].includes(option)) ? 'block' : 'none';
   document.getElementById('f-print-format').classList.remove('inv');
   updatePrintUnknownGuidance();
 }
 
 function updatePrintUnknownGuidance() {
-  const hasUnknownSpec = [state.printMethod, state.printBleed, state.printFormat].includes('unknown');
+  const hasUnknownSpec = [state.printMethod, state.printBleed].includes('unknown') || state.printFormats.includes('unknown');
   document.getElementById('print-unknown-guidance').style.display = hasUnknownSpec ? 'flex' : 'none';
 }
 
@@ -848,13 +862,14 @@ function buildPreview() {
     unknown: '分からない'
   };
   const printFormatLabels = { jpg: 'JPG', pdf: 'PDF', eps: 'EPS', ai: 'AI', psd: 'PSD', other: 'その他', unknown: '分からない' };
-  const hasUnknownPrintSpec = [state.printMethod, state.printBleed, state.printFormat].includes('unknown');
+  const hasUnknownPrintSpec = [state.printMethod, state.printBleed].includes('unknown') || state.printFormats.includes('unknown');
+  const printFormatText = state.printFormats.map(format => printFormatLabels[format]).join(' / ');
   const printDetailHtml = state.imgKind === '紙媒体' ? `
       <div class="prow ${hasUnknownPrintSpec ? 'print-spec-alert' : ''}"><span class="pk">印刷仕様</span><span class="pv">${hasUnknownPrintSpec ? `<strong>未確定</strong>（${printMethodLabels[state.printMethod] || '—'}）` : printMethodLabels[state.printMethod] || '—'}</span></div>
       ${state.printMethod === 'external' ? `<div class="prow"><span class="pk">印刷会社・入稿先</span><span class="pv">${fieldValue('inp-print-company')}</span></div>
       <div class="prow"><span class="pk">入稿資料</span><span class="pv">${state.printFiles.length ? state.printFiles.map(file => file.name).join(', ') : 'なし'}</span></div>` : ''}
       <div class="prow ${state.printBleed === 'unknown' ? 'print-spec-alert' : ''}"><span class="pk">トンボ・塗り足し</span><span class="pv">${printBleedLabels[state.printBleed] || '—'}</span></div>
-      <div class="prow ${state.printFormat === 'unknown' ? 'print-spec-alert' : ''}"><span class="pk">データ形式</span><span class="pv">${printFormatLabels[state.printFormat] || '—'}${state.printVersion ? '（' + state.printVersion + '）' : ''}</span></div>` : '';
+      <div class="prow ${state.printFormats.includes('unknown') ? 'print-spec-alert' : ''}"><span class="pk">データ形式</span><span class="pv">${printFormatText || '—'}${state.printVersion ? '（' + state.printVersion + '）' : ''}</span></div>` : '';
 
   let designHtml = '';
   if (state.count >= 2 && state.imgMode === 'individual') {
@@ -972,7 +987,7 @@ function validate(step) {
     if (state.imgKind === '紙媒体') {
       req('f-print-method', () => state.printMethod);
       req('f-print-bleed', () => state.printBleed);
-      req('f-print-format', () => state.printFormat);
+      req('f-print-format', () => state.printFormats.length ? 'ok' : '');
     }
   }
   if (step === 3) {
