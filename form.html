@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <title>デザインオーダーフォーム | 確認用</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.10.0/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <i class="ti ti-palette"></i>
+        <span>デザインオーダー</span>
+      </div>
+      <div class="header-right">
+        <span id="header-step-label">STEP 1 / 6</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="preview-only-banner">確認用サイト｜担当者名・支社名はダミー表示です</div>
+    <div class="fw">
+
+      <!-- お知らせ・混雑状況 -->
+      <div class="notice-stack">
+        <div class="info-card">
+          <div class="info-card-head"><i class="ti ti-speakerphone"></i>お知らせ</div>
+          <div class="info-card-body" id="notice-body">
+            <div class="info-entry" data-end-date="2026-05-27">
+              <div class="info-entry-date">2026/05/27</div>
+              <div class="info-entry-text">社員総会開催のため、当日の対応が遅れる場合があります。</div>
+            </div>
+            <div class="info-entry" data-end-date="2026-05-10">
+              <div class="info-entry-date">2026/04/15</div>
+              <div class="info-entry-text">GW休暇前の納期についてのご案内です。休暇前の依頼は早めにお願いします。</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-card congestion">
+          <div class="info-card-head"><i class="ti ti-gauge"></i>現在の混雑状況</div>
+          <div class="info-card-body">
+            <div class="congestion-row">
+              <div class="congestion-icon" id="congestion-icon"><i class="ti ti-clock"></i></div>
+              <div>
+                <div class="congestion-label" id="congestion-label">通常稼働</div>
+                <div class="congestion-sub" id="congestion-sub">標準的な対応状況です。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ステップインジケーター -->
+      <div class="steps" id="steps">
+        <div class="sd"><div class="dot on" id="d1"><i class="ti ti-user"></i></div><div class="slbl on" id="l1">依頼者</div></div>
+        <div class="sd"><div class="dot" id="d2"><i class="ti ti-photo"></i></div><div class="slbl" id="l2">画像種別</div></div>
+        <div class="sd"><div class="dot" id="d3"><i class="ti ti-layout"></i></div><div class="slbl" id="l3">媒体・サイズ</div></div>
+        <div class="sd"><div class="dot" id="d4"><i class="ti ti-brush"></i></div><div class="slbl" id="l4">デザイン指示</div></div>
+        <div class="sd"><div class="dot" id="d5"><i class="ti ti-clock"></i></div><div class="slbl" id="l5">納期・指名</div></div>
+        <div class="sd"><div class="dot" id="d6"><i class="ti ti-check"></i></div><div class="slbl" id="l6">確認・送信</div></div>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="prog" style="width:16.6%"></div></div>
+
+
+      <!-- Step1: 依頼者情報 -->
+      <div class="panel on" id="p1">
+        <p class="ptitle">依頼者情報</p>
+        <p class="psub">支社・担当者情報を入力してください。支社を選ぶと担当営業者が絞り込まれます。</p>
+        <div class="r2">
+          <div class="field" id="f-office">
+            <div class="lbl">支社名 <span class="req">必須</span></div>
+            <select id="sel-office" onchange="onOffice()">
+              <option value="">選択してください</option>
+              <option value="確認用支社1" data-id="1">確認用支社1</option>
+              <option value="確認用支社2" data-id="2">確認用支社2</option>
+              <option value="確認用支社3" data-id="3">確認用支社3</option>
+              <option value="確認用支社4" data-id="4">確認用支社4</option>
+              <option value="確認用支社5" data-id="5">確認用支社5</option>
+              <option value="確認用支社6" data-id="6">確認用支社6</option>
+              <option value="確認用支社7" data-id="7">確認用支社7</option>
+              <option value="確認用支社8" data-id="8">確認用支社8</option>
+              <option value="確認用支社9" data-id="9">確認用支社9</option>
+              <option value="確認用支社10" data-id="10">確認用支社10</option>
+              <option value="確認用支社11" data-id="11">確認用支社11</option>
+              <option value="確認用支社12" data-id="12">確認用支社12</option>
+              <option value="確認用支社13" data-id="13">確認用支社13</option>
+              <option value="その他">その他</option>
+            </select>
+            <div class="err">支社名を選択してください</div>
+          </div>
+          <div class="field" id="f-staff">
+            <div class="lbl">営業担当者 <span class="req">必須</span></div>
+            <select id="sel-staff"><option value="">先に支社を選択</option></select>
+            <input type="text" id="inp-staff-other" placeholder="担当者名を入力" style="display:none;margin-top:6px">
+            <div class="err">営業担当者を入力してください</div>
+          </div>
+        </div>
+        <div class="field" id="f-client">
+          <div class="lbl">フォーム記入者 <span class="req">必須</span></div>
+          <div class="radios">
+            <div class="rbtn sel" id="rb-honin" onclick="setClient('本人')"><i class="ti ti-user"></i>本人</div>
+            <div class="rbtn" id="rb-dairi" onclick="setClient('代理')"><i class="ti ti-users"></i>代理</div>
+          </div>
+        </div>
+        <div class="field" id="f-agent" style="display:none">
+          <div class="lbl">代理人名 <span class="req">必須</span></div>
+          <input type="text" id="inp-agent" placeholder="代理入力する方のお名前">
+          <div class="err">代理人名を入力してください</div>
+        </div>
+        <div class="field" id="f-email">
+          <div class="lbl">記入者メールアドレス <span class="req">必須</span></div>
+          <input type="email" id="inp-email" placeholder="yamada@example.com">
+          <div class="err">有効なメールアドレスを入力してください</div>
+        </div>
+      </div>
+
+      <!-- Step2: 画像種別 -->
+      <div class="panel" id="p2">
+        <p class="ptitle">画像種別・依頼内容</p>
+        <p class="psub">画像の種類を選択してください。</p>
+        <div class="field" id="f-imgtype">
+          <div class="lbl">画像について <span class="req">必須</span></div>
+          <div class="r2" style="margin-bottom:8px">
+            <div class="rcard" id="rc-new" onclick="setImgType(1)"><div class="rcard-title"><i class="ti ti-plus"></i> 新規作成</div><div class="rcard-sub">新しくデザインを作成する</div></div>
+            <div class="rcard" id="rc-fix" onclick="setImgType(2)"><div class="rcard-title"><i class="ti ti-edit"></i> 修正</div><div class="rcard-sub">過去に制作した画像の修正・変更・リサイズなど</div></div>
+            <div class="rcard" id="rc-pay" onclick="setImgType(3)"><div class="rcard-title"><i class="ti ti-currency-yen"></i> 有料案件</div><div class="rcard-sub">有料での制作</div></div>
+            <div class="rcard" id="rc-long" onclick="setImgType(4)"><div class="rcard-title"><i class="ti ti-archive"></i> 長期保留再入稿</div><div class="rcard-sub">保留案件の再依頼</div></div>
+          </div>
+          <div id="f-fixsource" class="field" style="display:none;margin-top:12px">
+            <div class="lbl">修正に使用する制作データについて選択してください <span class="req">必須</span></div>
+            <div class="radios" id="fixsource-radios">
+              <div class="rbtn fixsource-option" id="rb-fixsource-yes" onclick="setFixSource('yes')"><strong>制作データ（PSD）あり</strong><small>当社過去制作、またはデータ提供あり</small></div>
+              <div class="rbtn fixsource-option" id="rb-fixsource-no" onclick="setFixSource('no')"><strong>制作データなし（画像のみ）</strong><small>新規作成として受付</small></div>
+              <div class="rbtn" id="rb-fixsource-unknown" onclick="setFixSource('unknown')">分からない</div>
+            </div>
+            <div class="err">制作データの状況を選択してください</div>
+          </div>
+          <div class="warn-box" id="fixsource-guidance" style="display:none;margin-top:10px"></div>
+          <div id="f-imgkind" style="display:none;margin-top:8px"><div class="radios" id="radios-imgkind"></div></div>
+          <!-- 紙媒体を選択した場合のみ表示 -->
+          <div class="field print-spec-field" id="f-print-method" style="display:none;margin-top:12px">
+            <div class="warn-box print-intro" style="display:flex;margin-bottom:12px">
+              <i class="ti ti-info-circle"></i>
+              <span><strong>紙媒体をご依頼の方へ</strong><br>印刷方法や印刷会社によって、解像度・塗り足し・トンボの有無など、制作データの仕様が異なります。<br>分かる範囲で印刷方法を選択してください。印刷会社の入稿案内やテンプレートがある場合は、あわせてご共有ください。</span>
+            </div>
+            <div class="lbl">印刷方法について選択してください <span class="req">必須</span></div>
+            <div class="hint" style="margin-bottom:8px">分かる範囲で選択してください。</div>
+            <div class="radios" id="print-method-radios">
+              <div class="rbtn" id="rb-print-inhouse" onclick="setPrintMethod('inhouse')">店舗・社内で印刷する</div>
+              <div class="rbtn" id="rb-print-external" onclick="setPrintMethod('external')">外部の印刷会社へ入稿する</div>
+              <div class="rbtn" id="rb-print-unknown" onclick="setPrintMethod('unknown')">未定・分からない</div>
+            </div>
+            <div class="err">印刷方法を選択してください</div>
+
+            <div class="warn-box" id="print-inhouse-guidance" style="display:none">
+              <i class="ti ti-info-circle"></i>
+              <span>一般的な印刷仕様で制作します。サイズやデータ形式などに指定がある場合は、制作指示欄にご記入ください。</span>
+            </div>
+
+            <div class="print-external-details" id="print-external-details" style="display:none">
+              <div class="lbl">印刷会社・入稿先について <span class="opt">任意</span></div>
+              <div class="hint">印刷会社名やURLが分かる場合はご記入ください。</div>
+              <input type="text" id="inp-print-company" placeholder="例：ラクスル、プリントパックなど" oninput="state.printCompany=this.value">
+              <div class="upload-box small" style="margin-top:8px" onclick="document.getElementById('print-spec-files').click()">
+                <i class="ti ti-cloud-upload upload-icon"></i>
+                <div class="upload-main">テンプレート・入稿案内を添付</div>
+                <div class="upload-sub">PDF / AI / ZIP · 最大5ファイル・各20MBまで</div>
+              </div>
+              <input type="file" id="print-spec-files" multiple accept=".pdf,.ai,.zip,application/pdf,application/zip" style="display:none" onchange="handlePrintFiles(this)">
+              <div class="flist" id="print-spec-file-list"></div>
+              <div class="err upload-error" id="print-spec-file-error"></div>
+            </div>
+
+            <div class="print-subfield" id="f-print-bleed">
+              <div class="lbl">トンボ・塗り足しについて <span class="req">必須</span></div>
+              <div class="hint" style="margin-bottom:8px">塗り足しは基本3mmですが、印刷会社によって異なります。</div>
+              <div class="radios" id="print-bleed-radios">
+                <div class="rbtn" id="rb-print-bleed-required" onclick="setPrintBleed('required')">トンボ・塗り足しが必要</div>
+                <div class="rbtn" id="rb-print-bleed-none" onclick="setPrintBleed('none')">不要</div>
+                <div class="rbtn" id="rb-print-bleed-spec" onclick="setPrintBleed('spec')">印刷会社の指定に合わせる</div>
+                <div class="rbtn" id="rb-print-bleed-unknown" onclick="setPrintBleed('unknown')">分からない</div>
+              </div>
+              <div class="err">トンボ・塗り足しについて選択してください</div>
+            </div>
+
+            <div class="print-subfield" id="f-print-format">
+              <div class="lbl">希望するデータ形式 <span class="req">必須</span></div>
+              <div class="radios" id="print-format-radios">
+                <div class="rbtn" id="rb-print-format-jpg" onclick="setPrintFormat('jpg')">JPG</div>
+                <div class="rbtn" id="rb-print-format-pdf" onclick="setPrintFormat('pdf')">PDF</div>
+                <div class="rbtn" id="rb-print-format-eps" onclick="setPrintFormat('eps')">EPS</div>
+                <div class="rbtn" id="rb-print-format-ai" onclick="setPrintFormat('ai')">AI</div>
+                <div class="rbtn" id="rb-print-format-psd" onclick="setPrintFormat('psd')">PSD</div>
+                <div class="rbtn" id="rb-print-format-other" onclick="setPrintFormat('other')">その他</div>
+                <div class="rbtn" id="rb-print-format-unknown" onclick="setPrintFormat('unknown')">分からない</div>
+              </div>
+              <div class="err">希望するデータ形式を選択してください</div>
+              <div id="print-version-details" style="display:none;margin-top:10px">
+                <div class="lbl">バージョン・その他の指定 <span class="opt">任意</span></div>
+                <input type="text" id="inp-print-version" placeholder="例：Illustrator 2023以下、Photoshop 2022など" oninput="state.printVersion=this.value">
+              </div>
+            </div>
+
+            <div class="warn-box" id="print-unknown-guidance" style="display:none">
+              <i class="ti ti-alert-triangle"></i>
+              <span>印刷仕様が未確定のため、一般的な仕様で制作を進めます。<br>納品後に印刷先の仕様に合わせた変更・調整が必要となる場合、別途料金（ポイント）が発生することがあります。</span>
+            </div>
+          </div>
+          <div id="f-imcurl" style="display:none;margin-top:10px">
+            <div class="lbl">長期保留再入稿 URL <span class="req">必須</span></div>
+            <input type="url" id="inp-imcurl" placeholder="https://example.com">
+            <div class="err">URLを入力してください</div>
+          </div>
+          <div class="err">画像種別を選択してください</div>
+        </div>
+        <div class="field locked-field" id="f-pay">
+          <div class="lbl">請求方法 <span class="req">必須</span></div>
+          <div class="radios">
+            <div class="rbtn sel" id="rb-point"><i class="ti ti-coin"></i>ポイント</div>
+            <div class="rbtn" id="rb-yuryou"><i class="ti ti-credit-card"></i>有料</div>
+          </div>
+          <div class="hint">選択した画像種別に応じて自動設定されます。</div>
+          <div id="f-pay-url" style="display:none;margin-top:10px">
+            <div class="lbl" style="font-size:12px">入稿URL <span class="req">必須</span></div>
+            <input type="url" id="inp-pay-url" placeholder="https://example.com/submission">
+            <div class="hint">有料案件の入稿先URLを入力してください</div>
+            <div class="err">入稿URLを入力してください</div>
+          </div>
+        </div>
+        <div class="r2">
+          <div class="field" id="f-shop">
+            <div class="lbl">店舗名 <span class="req">必須</span></div>
+            <input type="text" id="inp-shop" placeholder="〇〇エステ 渋谷店">
+            <div class="err">店舗名を入力してください</div>
+          </div>
+          <div class="field" id="f-area">
+            <div class="lbl">エリア(都道府県・市町村) <span class="req">必須</span></div>
+            <input type="text" id="inp-area" placeholder="例：東京都・渋谷">
+            <div class="err">エリアを入力してください</div>
+          </div>
+        </div>
+        <div class="field" id="f-shopurl">
+          <div class="lbl">掲載URL <span class="req">必須</span></div>
+          <div class="radios" style="margin-bottom:8px">
+            <div class="rbtn sel" id="rb-urlyes" onclick="setUrlMode('あり')">URLあり</div>
+            <div class="rbtn" id="rb-urlno" onclick="setUrlMode('なし')">URLなし</div>
+          </div>
+          <div id="url-inputs">
+            <input type="url" id="inp-shopurl" placeholder="掲載URL（例：https://example.com/shop）" style="margin-bottom:6px">
+            <input type="url" id="inp-shopurl2" placeholder="ホームページURL（任意）">
+          </div>
+          <div class="err">掲載URLを入力してください</div>
+        </div>
+      </div>
+
+      <!-- Step3: 業種・媒体・サイズ -->
+      <div class="panel" id="p3">
+        <p class="ptitle">業種・媒体・サイズ</p>
+        <p class="psub">業種・媒体を選ぶと、対応するプランとサイズが自動で表示されます。</p>
+        <div class="field" id="f-industry">
+          <div class="lbl">業種 <span class="req">必須</span></div>
+          <div class="radios" id="industry-btns">
+            <div class="rbtn" onclick="setIndustry('風俗',this)">風俗</div>
+            <div class="rbtn" onclick="setIndustry('一般メンズエステ',this)">一般メンズエステ</div>
+            <div class="rbtn" onclick="setIndustry('ナイトワーク',this)">ナイトワーク</div>
+            <div class="rbtn" onclick="setIndustry('ホスト',this)">ホスト</div>
+            <div class="rbtn" onclick="setIndustry('その他',this)">その他</div>
+          </div>
+          <div class="warn-box" id="fuzoku-warn" style="display:none"><i class="ti ti-alert-triangle"></i>ソープ業種では使用できない文言があります</div>
+          <div class="err">業種を選択してください</div>
+        </div>
+        <div class="field" id="f-medium">
+          <div class="lbl">媒体名 <span class="req">必須</span>　<span class="opt">複数選択可</span></div>
+          <div class="hint" style="margin-bottom:8px">掲載する媒体をすべて選んでください。選んだ媒体ごとにプラン・サイズを設定します。</div>
+          <div class="radios" id="medium-chips"><div style="font-size:13px;color:var(--color-text-muted)">先に業種を選択してください</div></div>
+          <div class="err">媒体名を選択してください</div>
+        </div>
+        <!-- その他媒体名入力欄 -->
+        <div class="field" id="f-medium-other" style="display:none">
+          <div class="lbl">媒体名（その他）<span class="req">必須</span></div>
+          <input type="text" id="inp-medium-other" placeholder="例：〇〇メディア、△△サイト">
+          <div class="hint">「その他」を選んだ場合、掲載媒体名を直接入力してください</div>
+          <div class="err">媒体名を入力してください</div>
+        </div>
+
+        <!-- 媒体ごとのプラン・サイズブロック -->
+        <div id="medium-blocks"></div>
+
+        <div class="field" id="f-imgsize">
+          <div class="lbl">対象画像の種類名 / 画像サイズ（全体まとめ） <span class="req">必須</span></div>
+          <textarea id="inp-imgsize" placeholder="例：メイン画像・オプション画像全部 / A画像とメイン画像 / 700×300&#10;※特殊な絵文字は使用できません"></textarea>
+          <div class="hint">上で媒体・サイズを選ぶと自動入力されます。手入力で調整も可能です。</div>
+          <div class="err">画像サイズ・種類名を入力してください</div>
+        </div>
+        <div class="field" id="f-count">
+          <div class="lbl">画像総枚数 <span class="req">必須</span></div>
+          <input type="number" id="inp-count" min="1" max="99" placeholder="例：3" oninput="onCountChange()">
+          <div class="hint">選択したサイズの合計枚数を入力してください</div>
+          <div class="err">枚数を入力してください</div>
+        </div>
+      </div>
+
+      <!-- Step4: デザイン指示 -->
+      <div class="panel" id="p4">
+        <p class="ptitle">デザイン指示</p>
+        <p class="psub">媒体・サイズの内容を確認し、デザインの指示を入力してください。</p>
+
+        <div class="field" id="selected-media-recap" style="display:none">
+          <div class="lbl" style="font-size:12px">選択中の媒体・サイズ</div>
+          <div class="size-summary show" id="media-recap-body" style="margin-top:0"></div>
+        </div>
+
+        <!-- 画像ごとの指示：最初に表示 -->
+        <div class="field" id="multi-img-block" style="display:none">
+          <div class="lbl">画像ごとの指示</div>
+          <div class="hint" style="margin-bottom:10px">今回のご依頼は <strong id="multi-count-label">2枚</strong> です。全画像を同じ指示で進めるか、画像ごとに異なる指示を入力するかを選んでください。</div>
+          <div class="mode-toggle">
+            <div class="mode-btn sel" id="mode-common" onclick="setImgMode('common')">
+              <div class="mode-btn-title"><i class="ti ti-copy"></i>全画像共通でよい</div>
+              <div class="mode-btn-sub">以下の指示内容を1回入力するだけでOKです</div>
+            </div>
+            <div class="mode-btn" id="mode-individual" onclick="setImgMode('individual')">
+              <div class="mode-btn-title"><i class="ti ti-list-details"></i>画像によって指示を変えたい</div>
+              <div class="mode-btn-sub">指示カードを2枚から始めて、必要な枚数まで追加できます</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 共通モード：通常の指示項目を1回表示 -->
+        <div id="common-instructions-wrap">
+          <div class="design-instruction-block" data-card="common"></div>
+        </div>
+
+        <!-- 個別モード：画像ごとに指示項目をまるごと表示 -->
+        <div id="img-cards-wrap" style="display:none">
+          <div class="img-cards" id="img-cards"></div>
+        </div>
+      </div>
+
+      <!-- Step5: 納期・デザイナー指名 -->
+      <div class="panel" id="p5">
+        <p class="ptitle">納期・デザイナー指名</p>
+        <p class="psub">納期の希望と、希望するデザイナーを選択してください。</p>
+        <div class="field" id="f-delivery">
+          <div class="lbl">納期希望 <span class="req">必須</span></div>
+          <div class="radios">
+            <div class="rbtn" id="rb-d1" onclick="setDelivery('希望なし')"><i class="ti ti-calendar-off"></i>希望なし（通常納期）</div>
+            <div class="rbtn" id="rb-d2" onclick="setDelivery('事前予約')"><i class="ti ti-calendar-check"></i>事前予約分（通常納期）</div>
+            <div class="rbtn" id="rb-d3" onclick="setDelivery('納期指定')"><i class="ti ti-calendar-event"></i>納期指定</div>
+          </div>
+          <div id="date-input" style="display:none;margin-top:10px">
+            <input type="text" id="inp-date" placeholder="0000/00/00">
+            <div class="hint">下の「納期早見表」を確認の上、入力してください</div>
+          </div>
+          <div class="err">納期希望を選択してください</div>
+        </div>
+
+        <!-- 納期早見表（改善案2より統合） -->
+        <div class="deadline-guide">
+          <div class="deadline-guide-title"><i class="ti ti-calendar-time"></i>納期早見表（営業日）</div>
+          <div class="deadline-table-wrap">
+            <table class="deadline-table">
+              <thead>
+                <tr><th>簡単な修正・リサイズ</th><th>新規作成・大幅な修正</th><th>重い案件</th><th>急募</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="normal">2営業日</td>
+                  <td class="normal">5営業日</td>
+                  <td class="normal">7営業日</td>
+                  <td class="normal">10営業日</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="deadline-guide-title" style="margin-top:14px"><i class="ti ti-percentage"></i>納期短縮時のポイント倍率</div>
+          <div class="deadline-table-wrap">
+            <table class="deadline-table rate-table">
+              <thead>
+                <tr>
+                  <th>区分</th><th>0営業日<br>(即日)</th><th>1営業日<br>(翌日)</th><th>2営業日</th><th>3営業日</th><th>4営業日</th><th>5営業日</th><th>6営業日</th><th>7営業日</th><th>8営業日</th><th>9営業日</th><th>10営業日</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>簡単な修正<br>リサイズ</th>
+                  <td>2倍<span class="rate-cutoff">〆13:00</span></td>
+                  <td>1.2倍<span class="rate-cutoff">〆19:00</span></td>
+                  <td class="normal">通常</td>
+                  <td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td>
+                </tr>
+                <tr>
+                  <th>新規作成<br>大幅な修正</th>
+                  <td>2倍<span class="rate-cutoff">〆13:00</span></td>
+                  <td>2倍<span class="rate-cutoff">〆19:00</span></td>
+                  <td>2倍</td><td>1.5倍</td><td>1.2倍</td>
+                  <td class="normal">通常</td>
+                  <td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td>
+                </tr>
+                <tr>
+                  <th>重い案件</th>
+                  <td class="rate-disabled">―</td><td class="rate-disabled">―</td>
+                  <td>2倍<span class="rate-cutoff">〆13:00</span></td>
+                  <td>2倍<span class="rate-cutoff">〆19:00</span></td>
+                  <td>2倍</td><td>1.5倍</td><td>1.2倍</td>
+                  <td class="normal">通常</td>
+                  <td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td>
+                </tr>
+                <tr>
+                  <th>急募</th>
+                  <td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td><td class="rate-disabled">―</td>
+                  <td>2倍<span class="rate-cutoff">〆13:00</span></td>
+                  <td>2倍<span class="rate-cutoff">〆19:00</span></td>
+                  <td>2倍</td><td>1.5倍</td><td>1.2倍</td>
+                  <td class="normal">通常</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="deadline-note-list">
+            <li>納期は依頼時点では未確定です。内容や稼働状況によって希望に添えない場合があります</li>
+            <li>イレギュラーや依頼側での不備による修正が発生した場合、担当者が直接連絡します</li>
+            <li>事前予約は130％期間のみの適用となります</li>
+          </ul>
+        </div>
+
+        <div class="field" style="margin-top:1.25rem">
+          <div class="lbl">デザイナー指名 <span class="opt">任意</span></div>
+          <div class="hint" style="margin-bottom:8px">指名料 4pt が加算されます。状況によってお受けできない可能性があります。第一希望のみの場合、状況により指名なしとして進める場合があります。</div>
+          <div class="r3">
+            <div><div class="lbl" style="font-size:12px;margin-bottom:4px">第1希望</div><select id="sel-des1" onchange="syncDes(1)"><option value="">選択しない</option></select></div>
+            <div><div class="lbl" style="font-size:12px;margin-bottom:4px">第2希望</div><select id="sel-des2" onchange="syncDes(2)"><option value="">選択しない</option></select></div>
+            <div><div class="lbl" style="font-size:12px;margin-bottom:4px">第3希望</div><select id="sel-des3" onchange="syncDes(3)"><option value="">選択しない</option></select></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step6: 確認・送信 -->
+      <div class="panel" id="p6">
+        <p class="ptitle">内容確認・送信</p>
+        <p class="psub">送信前に入力内容をご確認ください。</p>
+        <div class="preview" id="preview-content"></div>
+        <div class="submit-notice"><i class="ti ti-info-circle"></i><span>送信することで利用規約に同意したものとみなします。</span><a class="terms-link" href="terms.html" target="_blank" rel="noopener">利用規約を確認</a></div>
+      </div>
+
+      <!-- Success -->
+      <div class="panel" id="p-success">
+        <div class="success">
+          <i class="ti ti-circle-check sicon"></i>
+          <div class="stitle">依頼を送信しました</div>
+          <div class="ssub">バックログに課題として登録されました。<br>デザイナーから確認の連絡がある場合はご対応をお願いします。<br><br>依頼ID：<strong id="req-id"></strong></div>
+        </div>
+      </div>
+
+      <div class="nav" id="nav-bar">
+        <button class="btn" id="btn-back" onclick="prevStep()" style="display:none"><i class="ti ti-arrow-left"></i> 戻る</button>
+        <div></div>
+        <button class="btn pri" id="btn-next" onclick="nextStep()">次へ <i class="ti ti-arrow-right"></i></button>
+      </div>
+
+    </div><!-- /.fw -->
+  </main>
+
+  <script src="data.js"></script>
+  <script src="form.js"></script>
+</body>
+</html>
